@@ -60,8 +60,3 @@ def readPlayerStats(url):
 
 	print(stat_table[0])
 	return stat_table
-
-#recordStatsOfAllActivePlayers("https://www.basketball-reference.com/teams/")
-
-
-#("https://www.basketball-reference.com/players/h/harrijo01.html")
