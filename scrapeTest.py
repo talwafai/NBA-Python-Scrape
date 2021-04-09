@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 # Function: recordStatsOfEntireTeam
 # Parameters:
 # Description: Reads from list of teams and finds the teams in the input array (clicks on the ones in the list or all)
@@ -57,4 +58,7 @@ def readPlayerStats(url):
 	print(stat_table[0])
 	return stat_table
 
-#readPlayerStats("https://www.basketball-reference.com/players/h/harrijo01.html")
+#recordStatsOfAllActivePlayers("https://www.basketball-reference.com/teams/")
+
+
+#("https://www.basketball-reference.com/players/h/harrijo01.html")
