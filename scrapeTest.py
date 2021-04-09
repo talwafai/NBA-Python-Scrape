@@ -19,11 +19,14 @@ def recordStatsOfAllActivePlayers(url):
 
 	# read the page contents using BeautifulSoup
 	soup = BeautifulSoup(requests.get(url).content, features='lxml')
+
+	# I am looking at all of the table containers, thei first of whicall of thh contains all of the active teams as hyperlinks.
 	rows = soup.findAll('div', class_="table_container")
 
+	# all of the team names are hyperlinks, the only ones in that particular table element
 	teams_data = [item for item in rows[0].findAll('a')]
-	team_names = [item.getText() for item in rows[0].findAll('a')]
-	#driver.find_element_by_link_text(items[0]).click()
+	print(teams_data)
+	#team_names = [item.getText() for item in rows[0].findAll('a')]
 
 	# outer loop that goes through each of the teams to be selected and navigates to the team roster
 	for team in [team_data for team_data in teams_data]:
