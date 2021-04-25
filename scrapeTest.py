@@ -25,19 +25,19 @@ def recordStatsOfAllActivePlayers(url):
 
 	# all of the team names are hyperlinks, the only ones in that particular table element
 	teams_data = [item for item in rows[0].findAll('a')]
-	print(teams_data)
+	print(teams_data[0])
 	#team_names = [item.getText() for item in rows[0].findAll('a')]
 
 	# outer loop that goes through each of the teams to be selected and navigates to the team roster
 	for team in [team_data for team_data in teams_data]:
-		print("TEAM searching for ", team.getText(), "...")
+		print( "TEAM: ", team.getText(), "...")
 		soup = BeautifulSoup(requests.get("https://www.basketball-reference.com"+team['href']).content, features='lxml')
 		soup = BeautifulSoup(requests.get("https://www.basketball-reference.com"+soup.findAll('a',  text = "2020-21")[0]['href']).content, features='lxml')
 
 		# grab the list of players then iterate over it
 		rows = ([item for item in soup.findAll("div", class_= "table_container")[0].findAll(attrs={"data-stat":"player"})])
 		for player_data in rows:
-			print("TEAM searching for ", player_data.getText(), "...")
+			print("searching for player: ", player_data.getText(), "...")
 			if player_data.findAll('a'):
 				readPlayerStats("https://www.basketball-reference.com"+player_data.findAll('a')[0]['href'])
 
@@ -52,6 +52,9 @@ def readPlayerStats(url):
 	rows = soup.findAll('tr', class_="full_table")
 	items = [[item.getText() for item in rows[i].findAll('td')] for i in range(len(rows))]
 	stat_table = {}
+
+	if not items:
+    		return
 
 	# loop over each row of the stats table and grab the players average stats for each season
 	for index, item in enumerate(items):
